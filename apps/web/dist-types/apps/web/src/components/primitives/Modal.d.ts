@@ -5,6 +5,6 @@ type Props = {
     children: ReactNode;
     title?: string;
 };
-export declare function Modal({ open, onClose, children, title }: Props): import("react/jsx-runtime").JSX.Element | null;
+export declare function Modal({ open, onClose, children, title }: Props): import("react/jsx-runtime").JSX.Element;
 export {};
 //# sourceMappingURL=Modal.d.ts.map

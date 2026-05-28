@@ -8,6 +8,8 @@
     "dev:server": "pnpm --filter @bc/server run dev",
     "dev:web": "pnpm --filter @bc/web run dev",
     "build": "pnpm -r --filter=./packages/shared run build && pnpm -r --filter=./apps/* run build",
+    "start": "pnpm --filter @bc/server run start",
+    "serve": "pnpm build && pnpm db:migrate && pnpm --filter @bc/server run start",
     "typecheck": "pnpm -r run typecheck",
     "lint": "pnpm -r run lint",
     "db:generate": "pnpm --filter @bc/server run db:generate",

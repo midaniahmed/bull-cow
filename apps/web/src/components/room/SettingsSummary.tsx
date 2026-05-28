@@ -15,10 +15,10 @@ export function SettingsSummary({ settings }: { settings: RoomSettings }) {
 
   return (
     <Card>
-      <div className="font-semibold mb-1 text-sm text-muted">Settings</div>
-      <ul className="text-sm flex flex-wrap gap-x-3 gap-y-1">
+      <div className="font-semibold mb-2 text-xs uppercase tracking-widest text-muted">Settings</div>
+      <ul className="text-xs flex flex-wrap gap-1.5 font-mono">
         {lines.map((l) => (
-          <li key={l} className="px-2 py-1 rounded bg-bg text-ink">
+          <li key={l} className="px-2 py-1 rounded-md border border-white/10 bg-white/5 text-ink/90">
             {l}
           </li>
         ))}

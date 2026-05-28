@@ -1,7 +1,8 @@
 import { type ButtonHTMLAttributes } from 'react';
 type Size = 'lg' | 'md' | 'sm';
 type Tone = 'primary' | 'secondary' | 'danger' | 'ghost';
-export declare const Button: import("react").ForwardRefExoticComponent<ButtonHTMLAttributes<HTMLButtonElement> & {
+type NativeProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration' | 'onDrag' | 'onDragStart' | 'onDragEnd'>;
+export declare const Button: import("react").ForwardRefExoticComponent<NativeProps & {
     size?: Size;
     tone?: Tone;
     loading?: boolean;

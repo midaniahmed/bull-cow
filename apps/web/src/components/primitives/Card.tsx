@@ -1,10 +1,24 @@
-import { type HTMLAttributes } from 'react';
+import { type ReactNode } from 'react';
+import { motion, useReducedMotion, type MotionProps } from 'framer-motion';
 import clsx from 'clsx';
+import { fadeRise } from '../../motion/index.js';
 
-export function Card({ className, children, ...rest }: HTMLAttributes<HTMLDivElement>) {
+type Props = {
+  className?: string;
+  children?: ReactNode;
+  /** Set false to opt out of the entrance animation (e.g. inside a stagger parent). */
+  animate?: boolean;
+} & Omit<MotionProps, 'children'>;
+
+export function Card({ className, children, animate = true, ...rest }: Props) {
+  const reduce = useReducedMotion();
+  const motionProps: MotionProps =
+    animate && !reduce
+      ? { variants: fadeRise, initial: 'hidden', animate: 'show', ...rest }
+      : rest;
   return (
-    <div className={clsx('card', className)} {...rest}>
+    <motion.div className={clsx('card', className)} {...motionProps}>
       {children}
-    </div>
+    </motion.div>
   );
 }

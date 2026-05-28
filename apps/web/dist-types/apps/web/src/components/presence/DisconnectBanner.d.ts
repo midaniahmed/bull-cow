@@ -1,2 +1,2 @@
-export declare function DisconnectBanner(): import("react/jsx-runtime").JSX.Element | null;
+export declare function DisconnectBanner(): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=DisconnectBanner.d.ts.map

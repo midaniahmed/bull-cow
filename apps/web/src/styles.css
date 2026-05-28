@@ -3,35 +3,120 @@
 @tailwind utilities;
 
 @layer base {
-  html, body, #root {
+  html,
+  body,
+  #root {
     height: 100%;
   }
   body {
-    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
     -webkit-tap-highlight-color: transparent;
+    color: theme('colors.ink');
+    background-color: theme('colors.bg');
+    /* Deep field gradient sits under the animated AppShell layer. */
+    background-image:
+      radial-gradient(1100px 700px at 78% -8%, rgba(168, 117, 255, 0.16), transparent 60%),
+      radial-gradient(1000px 620px at 12% 108%, rgba(62, 224, 255, 0.14), transparent 60%);
+    background-attachment: fixed;
   }
   button {
     touch-action: manipulation;
   }
+  :focus-visible {
+    outline: 2px solid theme('colors.accent');
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 @layer components {
+  /* ---- Surfaces: glassmorphism ---- */
+  .glass {
+    @apply rounded-2xl border border-white/10 shadow-glass;
+    background: rgba(20, 28, 46, 0.55);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  }
+  .glass-raised {
+    @apply glass shadow-glow;
+  }
+  /* Keep the .card class so existing usages upgrade for free. */
+  .card {
+    @apply glass p-4;
+  }
+
+  /* ---- Accent gradient text ---- */
+  .text-grad {
+    background: linear-gradient(120deg, #3ee0ff, #a875ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---- Buttons ---- */
   .btn {
-    @apply inline-flex items-center justify-center font-medium rounded-lg select-none transition-colors;
+    @apply relative inline-flex items-center justify-center font-semibold rounded-xl select-none transition-all overflow-hidden;
   }
-  .btn-lg { @apply text-base px-5 h-12 min-w-[44px]; }
-  .btn-md { @apply text-sm px-4 h-11 min-w-[44px]; }
-  .btn-sm { @apply text-sm px-3 h-9 min-w-[44px]; }
-  .btn-primary { @apply bg-accent text-bg hover:brightness-110 active:brightness-95 disabled:opacity-50 disabled:cursor-not-allowed; }
-  .btn-secondary { @apply bg-panel2 text-ink hover:brightness-110 disabled:opacity-50; }
-  .btn-danger { @apply bg-danger text-bg hover:brightness-110 disabled:opacity-50; }
-  .btn-ghost { @apply text-ink hover:bg-panel2; }
+  .btn-lg {
+    @apply text-base px-5 h-12 min-w-[44px];
+  }
+  .btn-md {
+    @apply text-sm px-4 h-11 min-w-[44px];
+  }
+  .btn-sm {
+    @apply text-sm px-3 h-9 min-w-[44px];
+  }
+  .btn-primary {
+    @apply text-bg shadow-glow hover:shadow-glow-lg disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none;
+    background-image: linear-gradient(120deg, #3ee0ff, #a875ff);
+  }
+  .btn-secondary {
+    @apply text-ink border border-white/10 hover:border-accent/40 hover:bg-white/5 disabled:opacity-40;
+    background: rgba(45, 58, 86, 0.4);
+  }
+  .btn-danger {
+    @apply text-bg shadow-glow-danger hover:brightness-110 disabled:opacity-40;
+    background-image: linear-gradient(120deg, #ff7d88, #ff5d6c);
+  }
+  .btn-ghost {
+    @apply text-muted hover:text-ink hover:bg-white/5;
+  }
 
-  .card { @apply bg-panel border border-panel2 rounded-xl p-4; }
-
+  /* ---- Digit cells ---- */
   .digit-cell {
-    @apply w-12 h-14 border border-panel2 rounded-lg font-mono text-2xl flex items-center justify-center bg-panel;
+    @apply w-12 h-14 rounded-xl font-mono text-2xl flex items-center justify-center tnum transition-all;
+    background: rgba(20, 28, 46, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
-  .digit-cell.active { @apply border-accent ring-2 ring-accent/40; }
-  .digit-cell.filled { @apply bg-panel2; }
+  .digit-cell.filled {
+    @apply text-ink border-white/15;
+    background: rgba(45, 58, 86, 0.5);
+  }
+  .digit-cell.active {
+    @apply border-accent text-accent shadow-glow;
+    transform: scale(1.06);
+  }
+}
+
+@layer utilities {
+  /* Faint terminal grid overlay for the background field. */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(62, 224, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(62, 224, 255, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

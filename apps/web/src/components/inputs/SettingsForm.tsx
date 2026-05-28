@@ -37,7 +37,7 @@ function Switch({
       <span
         className={clsx(
           'inline-block w-11 h-7 rounded-full relative transition-colors',
-          checked ? 'bg-accent' : 'bg-panel2'
+          checked ? 'bg-gradient-to-r from-accent to-accent2 shadow-glow' : 'bg-white/10'
         )}
       >
         <span
@@ -61,15 +61,15 @@ function Segmented<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div className="grid grid-cols-2 sm:flex sm:flex-row gap-1 bg-bg p-1 rounded-lg">
+    <div className="grid grid-cols-2 sm:flex sm:flex-row gap-1 border border-white/10 bg-white/[0.03] p-1 rounded-xl">
       {options.map((o) => (
         <button
           key={o.value}
           type="button"
           onClick={() => onChange(o.value)}
           className={clsx(
-            'flex-1 h-10 rounded-md text-sm',
-            value === o.value ? 'bg-accent text-bg' : 'bg-transparent text-muted'
+            'flex-1 h-10 rounded-lg text-sm font-medium transition-all',
+            value === o.value ? 'bg-gradient-to-r from-accent to-accent2 text-bg shadow-glow' : 'bg-transparent text-muted'
           )}
         >
           {o.label}
@@ -150,15 +150,15 @@ export function SettingsForm({ busy, onSubmit }: Props) {
           ]}
         />
         <div className="text-sm text-muted mb-1 mt-3">Turn time</div>
-        <div className="grid grid-cols-5 gap-1 bg-bg p-1 rounded-lg">
+        <div className="grid grid-cols-5 gap-1 border border-white/10 bg-white/[0.03] p-1 rounded-xl">
           {[10, 20, 30, 60, null].map((t) => (
             <button
               key={String(t)}
               type="button"
               onClick={() => setTL(t as 10 | 20 | 30 | 60 | null)}
               className={clsx(
-                'h-10 rounded-md text-sm',
-                timeLimit === t ? 'bg-accent text-bg' : 'text-muted'
+                'h-10 rounded-lg text-sm font-medium transition-all',
+                timeLimit === t ? 'bg-gradient-to-r from-accent to-accent2 text-bg shadow-glow' : 'text-muted'
               )}
             >
               {t == null ? 'None' : `${t}s`}

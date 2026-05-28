@@ -18,13 +18,13 @@ export function EmotePanel() {
   const toggleMute = useEmoteStore((s) => s.toggleMute);
   if (!code) return null;
   return (
-    <div className="fixed inset-x-0 bottom-0 pb-safe bg-bg/80 backdrop-blur-md border-t border-panel2 z-30">
+    <div className="fixed inset-x-0 bottom-0 pb-safe bg-bg/70 backdrop-blur-xl border-t border-white/10 z-30">
       <div className="px-3 py-2 flex items-center gap-2 overflow-x-auto">
         {EMOTE_CODES.map((c) => (
           <button
             key={c}
             onClick={() => void emit.sendEmote(c)}
-            className="w-11 h-11 rounded-full bg-panel border border-panel2 text-xl shrink-0"
+            className="w-11 h-11 rounded-full bg-white/5 border border-white/10 text-xl shrink-0 transition-all hover:border-accent/40 hover:bg-white/10 active:scale-90"
             aria-label={c}
           >
             {ICONS[c]}
@@ -35,7 +35,7 @@ export function EmotePanel() {
             const next = toggleMute(code);
             void emit.toggleMute(next);
           }}
-          className="ml-auto w-11 h-11 rounded-full bg-panel border border-panel2 text-xl shrink-0"
+          className="ml-auto w-11 h-11 rounded-full bg-white/5 border border-white/10 text-xl shrink-0 transition-all active:scale-90"
           aria-label="mute"
         >
           {muted ? '🔇' : '🔔'}

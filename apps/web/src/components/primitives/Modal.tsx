@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 import { useEffect } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { spring } from '../../motion/index.js';
 
 type Props = {
   open: boolean;
@@ -9,6 +11,8 @@ type Props = {
 };
 
 export function Modal({ open, onClose, children, title }: Props) {
+  const reduce = useReducedMotion();
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -22,19 +26,30 @@ export function Modal({ open, onClose, children, title }: Props) {
     };
   }, [open, onClose]);
 
-  if (!open) return null;
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 pt-safe pb-safe"
-      onClick={onClose}
-    >
-      <div
-        className="w-full sm:max-w-md bg-panel rounded-t-2xl sm:rounded-2xl p-5 pb-safe shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {title ? <h2 className="text-lg font-semibold mb-3">{title}</h2> : null}
-        {children}
-      </div>
-    </div>
+    <AnimatePresence>
+      {open ? (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm pt-safe pb-safe"
+          onClick={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.18 }}
+        >
+          <motion.div
+            className="glass w-full sm:max-w-md rounded-b-none sm:rounded-2xl rounded-t-2xl p-5 pb-safe"
+            onClick={(e) => e.stopPropagation()}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.98 }}
+            animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.98 }}
+            transition={spring.soft}
+          >
+            {title ? <h2 className="text-lg font-semibold mb-3">{title}</h2> : null}
+            {children}
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }

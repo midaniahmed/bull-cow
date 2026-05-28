@@ -12,18 +12,21 @@ export function HomePage() {
   const [editing, setEditing] = useState(false);
 
   return (
-    <div className="flex flex-col gap-4 max-w-md mx-auto pt-6">
+    <div className="flex flex-col gap-4 max-w-md mx-auto pt-6 min-h-[80dvh]">
       <Card>
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-xs text-muted">Playing as</div>
-            <div className="text-lg font-semibold">{nickname}</div>
+            <div className="text-xs uppercase tracking-widest text-muted">Playing as</div>
+            <div className="text-2xl font-bold text-grad">{nickname}</div>
           </div>
           <Button size="sm" tone="secondary" onClick={() => setEditing(true)}>
             Edit
           </Button>
         </div>
       </Card>
+
+      <div className="flex-1" />
+
       <Link to="/create">
         <Button size="lg" className="w-full">
           Create Room

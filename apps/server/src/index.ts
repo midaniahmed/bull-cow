@@ -1,4 +1,4 @@
-import Fastify from 'fastify';
+import Fastify, { type FastifyBaseLogger } from 'fastify';
 import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import {
@@ -9,12 +9,16 @@ import {
 import { config } from './config.js';
 import { logger } from './logger.js';
 import { registerRoutes } from './routes/index.js';
+import { registerStatic } from './static.js';
 import { attachSocketServer } from './sockets/index.js';
 import { installTimerHandler } from './rooms/timer-handler.js';
 
 async function main() {
   const app = Fastify({
-    loggerInstance: logger,
+    // pino's Logger type isn't structurally identical to FastifyBaseLogger
+    // (it lacks `msgPrefix`); narrow at this boundary so the app instance stays
+    // assignable to the plain FastifyInstance params used across the codebase.
+    loggerInstance: logger as FastifyBaseLogger,
     trustProxy: true,
   }).withTypeProvider<ZodTypeProvider>();
 
@@ -28,6 +32,7 @@ async function main() {
   });
 
   await registerRoutes(app);
+  await registerStatic(app);
 
   await app.ready();
   installTimerHandler();

@@ -42,10 +42,14 @@ export function DigitInput({ rules, onSubmit, submitLabel, disabled, autoFocus }
 
   return (
     <div className="flex flex-col gap-3 items-center">
-      <div className="text-xs text-muted text-center">
-        {rules.length} digits
-        {!rules.allowDuplicateDigits && ', unique'}
-        {!rules.allowLeadingZero && ', no leading 0'}
+      <div className="flex flex-wrap items-center justify-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-muted">
+        <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">{rules.length} digits</span>
+        {!rules.allowDuplicateDigits && (
+          <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">unique</span>
+        )}
+        {!rules.allowLeadingZero && (
+          <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5">no leading 0</span>
+        )}
       </div>
       <div className="relative" onClick={() => inputRef.current?.focus()}>
         <DigitCells value={value} length={rules.length} />
