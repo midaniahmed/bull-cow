@@ -1,0 +1,1 @@
+{"version":3,"file":"SettingsForm.d.ts","sourceRoot":"","sources":["../../../../../../src/components/inputs/SettingsForm.tsx"],"names":[],"mappings":"AACA,OAAO,EAGL,KAAK,YAAY,EAClB,MAAM,YAAY,CAAC;AAKpB,KAAK,KAAK,GAAG;IACX,IAAI,CAAC,EAAE,OAAO,CAAC;IACf,QAAQ,EAAE,CAAC,QAAQ,EAAE,YAAY,KAAK,IAAI,CAAC;CAC5C,CAAC;AAoEF,wBAAgB,YAAY,CAAC,EAAE,IAAI,EAAE,QAAQ,EAAE,EAAE,KAAK,2CA4HrD"}

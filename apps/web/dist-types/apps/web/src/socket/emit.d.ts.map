@@ -1,0 +1,1 @@
+{"version":3,"file":"emit.d.ts","sourceRoot":"","sources":["../../../../../src/socket/emit.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EACV,SAAS,EACT,SAAS,EACT,OAAO,EACP,aAAa,EACd,MAAM,YAAY,CAAC;AA+BpB,eAAO,MAAM,IAAI;;;yBAGM,OAAO;eACN,OAAO;;;0BAEP,MAAM;oBAEZ,OAAO;yBACF,MAAM;;sBAGT,SAAS;wBAEP,OAAO;;6BAGF,OAAO;;eAGV,aAAa;;CACpC,CAAC"}

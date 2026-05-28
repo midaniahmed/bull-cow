@@ -1,0 +1,21 @@
+node_modules
+dist
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.turbo
+.vite
+coverage
+.pnpm-store
+.parcel-cache
+.next
+out
+
+# IDE
+.vscode/
+.idea/
+
+# Drizzle
+drizzle/.snapshots/

@@ -1,0 +1,157 @@
+{
+  "id": "749907da-efa6-4912-b645-bc50db5217c2",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.matches": {
+      "name": "matches",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "room_code": {
+          "name": "room_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "creator_session_token": {
+          "name": "creator_session_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "joiner_session_token": {
+          "name": "joiner_session_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "creator_nickname": {
+          "name": "creator_nickname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "joiner_nickname": {
+          "name": "joiner_nickname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "settings": {
+          "name": "settings",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "secrets": {
+          "name": "secrets",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "guess_log": {
+          "name": "guess_log",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "outcome": {
+          "name": "outcome",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ended_at": {
+          "name": "ended_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "matches_room_code_ended_at_idx": {
+          "name": "matches_room_code_ended_at_idx",
+          "columns": [
+            {
+              "expression": "room_code",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "ended_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "matches_creator_token_idx": {
+          "name": "matches_creator_token_idx",
+          "columns": [
+            {
+              "expression": "creator_session_token",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "matches_joiner_token_idx": {
+          "name": "matches_joiner_token_idx",
+          "columns": [
+            {
+              "expression": "joiner_session_token",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

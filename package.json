@@ -1,0 +1,24 @@
+{
+  "name": "bulls-and-cows-pvp",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter=./apps/* run dev",
+    "dev:server": "pnpm --filter @bc/server run dev",
+    "dev:web": "pnpm --filter @bc/web run dev",
+    "build": "pnpm -r --filter=./packages/shared run build && pnpm -r --filter=./apps/* run build",
+    "typecheck": "pnpm -r run typecheck",
+    "lint": "pnpm -r run lint",
+    "db:generate": "pnpm --filter @bc/server run db:generate",
+    "db:migrate": "pnpm --filter @bc/server run db:migrate"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.10.0"
+  },
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
